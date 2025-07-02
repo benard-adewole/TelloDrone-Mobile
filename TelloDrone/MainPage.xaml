@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Controls="clr-namespace:FormsJoystick.CustomControls"
+             xmlns:VM="clr-namespace:TelloDrone.ViewModels"
+             xmlns:MaterialFont="clr-namespace:MaterialDesign"
+             xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="Black"    
+             x:Class="TelloDrone.MainPage">
+    <ContentPage.Behaviors>
+        <xct:StatusBarBehavior StatusBarColor="Black" StatusBarStyle="LightContent"/>
+    </ContentPage.Behaviors>
+    <ContentPage.BindingContext>
+        <VM:FreeFlightVM/>
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="Auto,*,1.2*">
+        <Image Source="drone.jpeg" Aspect="AspectFill" Grid.RowSpan="3" Opacity="0.9"/>
+         <Grid ColumnDefinitions="40,*" Grid.Row="0" BackgroundColor="#96000000" >
+                <Label Text="{x:Static MaterialFont:FontIcon.ChevronLeft}" Grid.Column="0" FontFamily="MF" FontSize="30" HorizontalOptions="Center"/>
+                    
+                    <FlexLayout Direction="Row" Grid.Column="1" JustifyContent="SpaceEvenly" AlignItems="Center">
+                        <Label FontFamily="MF" >
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} {1}m/s">
+                                    <Binding Source="{x:Static MaterialFont:FontIcon.Quadcopter}" />
+                                    <Binding Path="Speed" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <BoxView Style="{StaticResource widgetSeparator}"/>
+                        <Label FontFamily="MF" >
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}{1}">
+                                    <Binding Path="Temperature" />
+                                    <Binding Source="{x:Static MaterialFont:FontIcon.TemperatureCelsius}" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <BoxView Style="{StaticResource widgetSeparator}"/>
+                        <Label FontFamily="MF" Text="{x:Static MaterialFont:FontIcon.Wifi}"  >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Connect}"/>
+                            </Label.GestureRecognizers>
+                            <Label.Triggers>
+                                <DataTrigger Binding="{Binding DroneConnected}" TargetType="Label" Value="False">
+                                    <Setter Property="TextColor" Value="PaleVioletRed"/>
+                                    <Setter Property="Text" Value="{x:Static MaterialFont:FontIcon.WifiOff}"/>
+                                </DataTrigger>
+
+                            </Label.Triggers>
+                        </Label>
+                        <BoxView Style="{StaticResource widgetSeparator}"/>
+                        <Label Text="Take Off" TextColor="GreenYellow">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TakeOffOrLand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        
+                        <BoxView Style="{StaticResource widgetSeparator}"/>
+                        <Label FontFamily="MF" >
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}{1}m">
+                                    <Binding Source="{x:Static MaterialFont:FontIcon.ArrowExpandHorizontal}" />
+                                    <Binding Path="Width" />
+
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <BoxView Style="{StaticResource widgetSeparator}"/>
+                        <Label FontFamily="MF" >
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}{1}m">
+                                    <Binding Source="{x:Static MaterialFont:FontIcon.ArrowExpandVertical}" />
+                                    <Binding Path="Height" />
+
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <BoxView Style="{StaticResource widgetSeparator}"/>
+
+                        <Label FontFamily="MF" >
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}{1}%">
+                                    <Binding Source="{x:Static MaterialFont:FontIcon.Battery}" />
+                                    <Binding Path="Battery" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <BoxView Style="{StaticResource widgetSeparator}"/>
+
+                        <Label FontFamily="MF" Text="{x:Static MaterialFont:FontIcon.DotsHorizontal}" />
+                    </FlexLayout>
+
+
+            </Grid>
+            
+        <Grid ColumnDefinitions="*,Auto,*" Grid.Row="2" Padding="20,0">
+            <Controls:JoystickControl Margin="0,0,0,20" WidthRequest="150" HeightRequest="150"
+                                      Xposition="{Binding LR, Mode=OneWayToSource}" Yposition="{Binding FB,Mode=OneWayToSource}" 
+                                      Grid.Column="0" HorizontalOptions="Start" VerticalOptions="End" Opacity="0.8"/>
+            <Controls:JoystickControl Margin="0,0,0,20" Grid.Column="2" WidthRequest="150" HeightRequest="150" 
+                                      HorizontalOptions="End" VerticalOptions="End" Opacity="0.8"  />
+            <Border Grid.Column="1" Padding="15,15,15,30" Margin="0,0,0,-25" HorizontalOptions="Center"  VerticalOptions="End"
+                   BackgroundColor="#96000000" Stroke="GreenYellow" StrokeShape="RoundRectangle 20,20,0,0"
+                   >
+                <StackLayout Orientation="Horizontal" VerticalOptions="End" Spacing="20">
+                   <ImageButton Style="{Binding widgetButtons}" BackgroundColor="Transparent">
+                            <ImageButton.Source>
+                                <FontImageSource Glyph="{x:Static MaterialFont:FontIcon.InformationOutline}" FontFamily="MF" Color="White" Size="40"/>
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton Style="{Binding widgetButtons}" BackgroundColor="Transparent">
+                            <ImageButton.Source>
+                                <FontImageSource Glyph="{x:Static MaterialFont:FontIcon.CameraOutline}" FontFamily="MF" Color="White" Size="40"/>
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton Style="{Binding widgetButtons}" BackgroundColor="Transparent">
+                            <ImageButton.Source>
+                                <FontImageSource Glyph="{x:Static MaterialFont:FontIcon.Video}" FontFamily="MF" Color="White" Size="40"/>
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton Style="{Binding widgetButtons}" BackgroundColor="Transparent">
+                            <ImageButton.Source>
+                                <FontImageSource Glyph="{x:Static MaterialFont:FontIcon.SwapHorizontal}" FontFamily="MF" Color="White" Size="40"/>
+                            </ImageButton.Source>
+                        </ImageButton>
+                </StackLayout>
+
+            </Border>
+        </Grid>
+        
+    </Grid>
+
+</ContentPage>
+

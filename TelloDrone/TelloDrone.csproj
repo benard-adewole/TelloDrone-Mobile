@@ -1,0 +1,114 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
+		<OutputType>Exe</OutputType>
+		<RootNamespace>TelloDrone</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<!-- Display name -->
+		<ApplicationTitle>TelloDrone</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.tellodrone</ApplicationId>
+		<ApplicationIdGuid>3a85859c-f1fb-4e5e-af1a-f23c4f8d0c27</ApplicationIdGuid>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="TelloSharp" Version="1.0.3" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="4.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="ViewModels\" />
+	  <None Remove="Resources\Images\drone.jpeg" />
+	  <None Remove="Controls\" />
+	  <None Remove="Handlers\" />
+	  <None Remove="Platforms\Android\Resources\drawable\drone.jpeg" />
+	  <None Remove="Platforms\Android\Resources\drawable\stick.png" />
+	  <None Remove="Platforms\Android\Resources\drawable\pad.png" />
+	  <None Remove="Platforms\Android\Resources\Layout\" />
+	  <None Remove="Resources\Fonts\Font Awesome 5 Free-Regular-400.otf" />
+	  <None Remove="Resources\Fonts\Inter-Black.ttf" />
+	  <None Remove="Resources\Fonts\Inter-Bold.ttf" />
+	  <None Remove="Resources\Fonts\Inter-ExtraBold.ttf" />
+	  <None Remove="Resources\Fonts\Inter-ExtraLight.ttf" />
+	  <None Remove="Resources\Fonts\Inter-Light.ttf" />
+	  <None Remove="Resources\Fonts\Inter-Medium.ttf" />
+	  <None Remove="Resources\Fonts\Inter-Regular.ttf" />
+	  <None Remove="Resources\Fonts\Inter-SemiBold.ttf" />
+	  <None Remove="Resources\Fonts\Inter-Thin.ttf" />
+	  <None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-Black.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-BlackItalic.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-Bold.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-BoldItalic.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-ExtraBold.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-ExtraBoldItalic.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-ExtraLight.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-ExtraLightItalic.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-Italic.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-Light.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-LightItalic.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-Regular.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-SemiBold.ttf" />
+	  <None Remove="Resources\Fonts\NunitoSans-SemiBoldItalic.ttf" />
+	  <None Remove="Resources\Fonts\OFL.txt" />
+	  <None Remove="Resources\Icons\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Include="Platforms\iOS\Resources\pad.png" />
+	  <AndroidResource Include="Platforms\iOS\Resources\stick.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="ViewModels\" />
+	  <Folder Include="Controls\" />
+	  <Folder Include="Platforms\Android\Resources\Layout\" />
+	  <Folder Include="Resources\Icons\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Platforms\Android\Resources\drawable\drone.jpeg" />
+	  <BundleResource Include="Platforms\Android\Resources\drawable\stick.png" />
+	  <BundleResource Include="Platforms\Android\Resources\drawable\pad.png" />
+	  <BundleResource Include="Resources\Fonts\OFL.txt" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,36 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TelloDrone"
+             x:Class="TelloDrone.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="VerticalOptions" Value="Center"/>              
+            <Setter Property="FontSize" Value="20"/>                          
+            <Setter Property="Margin" Value="0,5"/>                          
+        </Style>
+        <Style TargetType="BoxView" x:Key="widgetSeparator">
+            <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
+            <Setter Property="Opacity" Value="0.5"/>              
+            <Setter Property="WidthRequest" Value="0.5"/>              
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>              
+            <!--<Setter Property="FlexLayout.AlignSelf" Value="Stretch"/>-->              
+        </Style>
+
+        <Style TargetType="ImageButton" x:Key="widgetButtons">
+            <Setter Property="BackgroundColor" Value="Transparent"/>           
+            <Setter Property="VerticalOptions" Value="Center"/>           
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            
+        </Style>
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>
+
