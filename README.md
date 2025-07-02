@@ -38,7 +38,12 @@ Fig 2 - Screenshot when the app connects to the drone
 
 ![image2](https://github.com/user-attachments/assets/bf2a7e1d-48ae-4d4a-887c-484f24f09362)
 Fig 3 - Screenshot when the drone has taken off
+<br><br><be>
+
+![image4](https://github.com/user-attachments/assets/c2c362b0-47a3-4f24-a61a-abb1d6af5727)
+Fig 4 - Screenshot of the iOS version
 <br><br><br>
+
 
 <b>Conclusion</b>
 <p>The drone-controlling app offers a simple and effective way for users to control their drones. With its user-friendly interface and robust safety features, the app provides users with the peace of mind that comes from knowing that their drone is under control. The app's compatibility with both iOS and Android platforms makes it accessible to a wide range of users, and its live video streaming and telemetry data features allow users to fully understand and control their drones. Overall, the drone controlling app represents a major step forward in the field of drone technology and provides a valuable tool for drone enthusiasts and professionals alike.</p>
